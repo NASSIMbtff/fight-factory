@@ -1,101 +1,142 @@
-import Image from "next/image";
+"use client";
+import { useState } from "react";
 
-export default function Home() {
+const HomePage = () => {
+  const [isRegisterVisible, setRegisterVisible] = useState(false);
+  const [isLoginVisible, setLoginVisible] = useState(false);
+
+  const handleTariffClick = () => {
+    const isMember = confirm("Êtes-vous déjà membre ?");
+    if (isMember) {
+      setLoginVisible(true);
+    } else {
+      setRegisterVisible(true);
+    }
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <main className="bg-black text-white min-h-screen">
+      {/* Bannière */}
+      <section className="relative bg-[url('/path-to-image.jpg')] bg-cover bg-center h-[80vh] flex items-center">
+        <div className="bg-black bg-opacity-60 text-white w-full h-full flex flex-col justify-center items-center text-center px-6">
+          <h1 className="text-5xl font-extrabold mb-4 text-red-500">
+            Bienvenue à Fight Factory
+          </h1>
+          <p className="text-lg italic text-gray-300">
+            "Le feu de votre transformation commence ici."
+          </p>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+
+      {/* Description */}
+      <section className="py-12 text-center px-6 bg-black">
+        <h2 className="text-3xl font-bold text-red-500">À propos</h2>
+        <p className="mt-4 text-gray-400">
+          Fight Factory est un gym unique en son genre. Avec des coachs
+          expérimentés et une communauté passionnée, nous sommes là pour vous
+          aider à atteindre vos objectifs, que ce soit la compétition, la remise
+          en forme ou simplement une nouvelle passion.
+        </p>
+      </section>
+
+      {/* Tarifs */}
+      <section className="py-12 bg-gray-900">
+        <div className="container mx-auto text-center">
+          <h2 className="text-3xl font-bold text-red-500">Nos Tarifs</h2>
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                plan: "Mensuel",
+                price: "60€",
+                perks: "Accès libre à la salle, 1 cours/semaine.",
+              },
+              {
+                plan: "Trimestriel",
+                price: "150€",
+                perks: "3 cours/semaine, réductions événements.",
+              },
+              {
+                plan: "Annuel",
+                price: "500€",
+                perks: "Illimité, 50% réduction événements.",
+              },
+            ].map((tariff, index) => (
+              <div
+                key={index}
+                className="bg-black border border-red-500 shadow-lg rounded-lg p-6"
+              >
+                <h3 className="text-xl font-bold text-white">{tariff.plan}</h3>
+                <p className="mt-4 text-4xl font-bold text-red-500">
+                  {tariff.price}
+                </p>
+                <p className="mt-2 text-gray-300">{tariff.perks}</p>
+                <button
+                  onClick={handleTariffClick}
+                  className="mt-4 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+                >
+                  Choisir ce tarif
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Formulaires */}
+      {isLoginVisible && (
+        <section id="login-form" className="py-12 text-center px-6">
+          <h2 className="text-3xl font-bold text-red-500">Connexion</h2>
+          <form className="mt-8 max-w-md mx-auto space-y-4">
+            <input
+              type="email"
+              placeholder="Email"
+              className="w-full border border-red-500 rounded-lg px-4 py-3 bg-black text-white"
+            />
+            <input
+              type="password"
+              placeholder="Mot de passe"
+              className="w-full border border-red-500 rounded-lg px-4 py-3 bg-black text-white"
+            />
+            <button
+              type="submit"
+              className="bg-red-500 text-white px-6 py-3 rounded-lg hover:bg-red-600 w-full"
+            >
+              Se connecter
+            </button>
+          </form>
+        </section>
+      )}
+
+      {isRegisterVisible && (
+        <section id="register-form" className="py-12 text-center px-6">
+          <h2 className="text-3xl font-bold text-red-500">Inscription</h2>
+          <form className="mt-8 max-w-md mx-auto space-y-4">
+            {[
+              "Nom",
+              "Prénom",
+              "Email",
+              "Numéro de téléphone",
+              "Genre",
+              "Âge",
+            ].map((field, index) => (
+              <input
+                key={index}
+                type={field === "Email" ? "email" : field === "Âge" ? "number" : "text"}
+                placeholder={field}
+                className="w-full border border-red-500 rounded-lg px-4 py-3 bg-black text-white"
+              />
+            ))}
+            <button
+              type="submit"
+              className="bg-red-500 text-white px-6 py-3 rounded-lg hover:bg-red-600 w-full"
+            >
+              S'inscrire
+            </button>
+          </form>
+        </section>
+      )}
+    </main>
   );
-}
+};
+
+export default HomePage;
